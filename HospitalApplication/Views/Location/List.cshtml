@@ -1,0 +1,14 @@
+﻿@model IEnumerable<HospitalApplication.Models.Location>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+
+@foreach (var location in Model)
+{
+
+    <h2><a href="/Location/Details/@location.LocationId">@location.LocationName</a></h2>
+    <div>@location.LocationAddress</div>
+    <div>@location.LocationContactNo</div>
+}
