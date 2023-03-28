@@ -31,4 +31,15 @@ namespace HospitalApplication.Models
 
 
     }
+    public class CareerDto
+    {
+        public int CareerId { get; set; }
+        public string JobName { get; set; }
+        public int JobId { get; set; }
+
+        public string JobDescription { get; set; }
+        public int DepartmentId { get; set; }
+        public int LocationId { get; set; }
+
+    }
 }
