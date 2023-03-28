@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Web.Mvc;
 using System.Net.Http;
 using HospitalApplication.Models;
+
 using System.Web.Script.Serialization;
 
 namespace HospitalApplication.Controllers
@@ -112,44 +113,60 @@ namespace HospitalApplication.Controllers
         // GET: Location/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            //the existing location information
+            string url = "findlocation/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            Location SelectedLocation = response.Content.ReadAsAsync<Location>().Result;
+            
+            return View(SelectedLocation);
         }
 
         // POST: Location/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Update(int id, Location location)
         {
-            try
-            {
-                // TODO: Add update logic here
+            string url = "updatelocation/"+id;
+            string jsonpayload = jss.Serialize(location);
+            Debug.WriteLine(jsonpayload);
 
-                return RedirectToAction("Index");
-            }
-            catch
+            HttpContent content = new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
             }
         }
 
         // GET: Location/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult DeleteConfirm(int id)
         {
-            return View();
+            string url = "findlocation/"+id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            Location SelectedLocation = response.Content.ReadAsAsync<Location>().Result;
+            return View(SelectedLocation);
         }
 
         // POST: Location/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            string url = "deletelocation/"+id;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
 
-                return RedirectToAction("Index");
-            }
-            catch
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
             }
         }
     }

@@ -183,6 +183,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CareerDataController.cs" />
+    <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\DepartmentDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
@@ -228,7 +229,6 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Career.cs" />
     <Compile Include="Models\Department.cs" />
-    <Compile Include="Models\DepartmentController.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -297,6 +297,13 @@
     <Content Include="Views\Location\Details.cshtml" />
     <Content Include="Views\Location\New.cshtml" />
     <Content Include="Views\Location\Error.cshtml" />
+    <Content Include="Views\Location\DeleteConfirm.cshtml" />
+    <Content Include="Views\Location\Edit.cshtml" />
+    <Content Include="Views\Department\New.cshtml" />
+    <Content Include="Views\Department\Error.cshtml" />
+    <Content Include="Views\Department\Edit.cshtml" />
+    <Content Include="Views\Department\Details.cshtml" />
+    <Content Include="Views\Department\DeleteConfirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
