@@ -8,6 +8,7 @@ using System.Net.Http;
 using HospitalApplication.Models;
 
 using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 
 namespace HospitalApplication.Controllers
 {
@@ -37,7 +38,8 @@ namespace HospitalApplication.Controllers
             Debug.WriteLine("the response code is: ");
             Debug.WriteLine(response.StatusCode);
 
-            IEnumerable<Location> locations = response.Content.ReadAsAsync<IEnumerable<Location>>().Result;
+            Location location = response.Content.ReadAsAsync<Location>().Result;
+            IEnumerable<Location> locations = new List<Location>() { location };
 
             Debug.WriteLine("Number of Locations recieved:");
             Debug.WriteLine(locations.Count());
